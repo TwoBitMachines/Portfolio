@@ -1,0 +1,631 @@
+<details class="card collapsible">
+    <summary class="collapsible-header">
+        <div class="header-flex">
+            <img src="Images/FlareEngineSmall.png" alt="Thumbnail" class="project-thumb" />
+            <h3>Flare Engine — 2D Platformer Framework</h3>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+        <p class="intro-text">
+            This was my rite of passage engineering project. I designed and built the framework to solve common 2D
+            platformer problems while maintaining a clean, modular architecture. It is published on the Unity Asset
+            Store and has been used by other developers to ship their projects. Here are some of the key challenges and
+            problems I solved.
+        </p>
+
+        <!-- Character Controller -->
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>Character Controller</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <div class="image-carousel-wrapper">
+                        <!-- Important: root element must have class "image-carousel" because index.js looks for that -->
+                        <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" data-duration="2700">
+                                    <img src="Images/JumpAndSlope.gif" alt="Jump and slope handling." />
+                                </div>
+                                <div class="swiper-slide" data-duration="3800">
+                                    <img src="Images/MovingPlatform.gif" alt="Moving Platform." />
+                                </div>
+                                <div class="swiper-slide" data-duration="6000">
+                                    <img src="Images/Bridge.gif" alt="Bridge" />
+                                </div>
+                                <div class="swiper-slide" data-duration="3800">
+                                    <img src="Images/Zipline.gif" alt="Zipline." />
+                                </div>
+                                <div class="swiper-slide" data-duration="3800">
+                                    <img src="Images/Yoshi.gif" alt="Yoshi." />
+                                </div>
+                                <div class="swiper-slide" data-duration="3400">
+                                    <img src="Images/Cannon.gif" alt="Cannon." />
+                                </div>
+                                <div class="swiper-slide" data-duration="4000">
+                                    <img src="Images/GrapplingGun.gif" alt="Grappling Gun." />
+                                </div>
+                                <div class="swiper-slide" data-duration="17000">
+                                    <img src="Images/PlayerInspector.gif" alt="Player Inspector." />
+                                </div>
+                                <!-- add more slides as needed -->
+                            </div>
+
+                            <!-- navigation -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+
+                            <!-- fraction pagination (1 / 3) -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <br>
+                        <ul class="feature-list">
+                            <li>
+                                <strong>Custom Collision Detection:</strong> Unity’s physics system prioritizes
+                                force-based simulation over precision, which can cause jitter during complex
+                                interactions. To solve this, I built a custom raycast-based collision and movement
+                                system that guarantees stable, deterministic motion across slopes, moving platforms, and
+                                one-way surfaces. This system avoids the unpredictability of Unity’s default physics
+                                while remaining flexible enough to support mechanics like vehicles, cannons, and
+                                grappling hooks.
+                                <br><br>
+                                On top of that, I implemented dynamic elements such as bouncy bridges, ropes, and
+                                ziplines using Verlet integration. These systems respond naturally to player
+                                interaction, deforming and swinging in real time while remaining fully stable,
+                                demonstrating custom physics programming outside Unity’s built in physics.
+                            </li>
+                            <li>
+                                <strong>Priority-Based State Manager:</strong> Managing more than twenty player
+                                abilities with traditional state machines led to tangled branching logic and difficult
+                                bugs. I replaced this with a priority-based state manager that evaluates abilities every
+                                frame and resolves conflicts deterministically, such as Dash cleanly overriding Walk.
+                            </li>
+                            <li>
+                                <strong>Designer Tooling:</strong> To allow designers to iterate without touching code,
+                                I built custom Unity Editor inspectors that expose all relevant parameters, including
+                                forces, cooldowns, and priorities. This enabled fast tuning and experimentation while
+                                keeping the underlying systems clean and maintainable.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- AIFSM-->
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>AI Finite State Machine (AIFSM)</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-duration="10000">
+                            <img src="Images/AIFSM.gif" alt="AIFSM." />
+                        </div>
+                    </div>
+
+                    <div class="subtitle">
+                        If the player is not hiding, the bot will attack. If the player is hiding, the bot will go into
+                        the idle state.
+                    </div>
+
+                    <div class="content-box">
+                        <br>
+                        <ul class="feature-list">
+                            <li>
+                                <strong>Inspector-Based FSM:</strong> Unity’s Animator forces designers to work in
+                                separate windows and manage transitions through complex parameters, slowing workflow for
+                                non-animation tasks. I built a complete state machine that lives entirely in the Unity
+                                Inspector. Designers can create color-coded states, add behavior nodes, and configure
+                                transitions through dropdowns—no scripting required.
+                                <br><br>
+                                The main challenge was fitting an entire state machine into the limited space of the
+                                Inspector. I solved this by designing a compact, collapsible layout with inline editing,
+                                keeping the whole FSM readable and manageable without a dedicated graph window.
+                            </li>
+                            <li>
+                                <strong>Node Library:</strong> The library consists of 100+ reusable nodes for movement,
+                                sensing, and actions, each with visual success/failure branching. Designers can see live
+                                execution flow at runtime, making enemy behavior, doors, triggers, and stateful objects
+                                easy to build and debug.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- A Star-->
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>Gravity-Based A* Pathfinding</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <div class="content-box">
+                        <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" data-duration="25000">
+                                    <img src="Images/AStarPathfinding.gif" alt="Jump and slope handling." />
+                                </div>
+                                <div class="swiper-slide" data-duration="6000">
+                                    <img src="Images/AStarGrid.png" alt="Moving Platform." />
+                                </div>
+                                <!-- add more slides as needed -->
+                            </div>
+
+                            <!-- navigation -->
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+
+                            <!-- fraction pagination (1 / 3) -->
+                            <div class="swiper-pagination"></div>
+                        </div>
+
+                        <div class="subtitle">
+                            Grid nodes are typically generated during editor time. But the newest sytem
+                            works with unity Tilemap during runtime to generate dynamic maps.
+                        </div>
+                        <br>
+
+                        <ul class="feature-list">
+                            <li>
+                                <strong>The Algorithm:</strong> Traditional A* assumes grid-based neighbors and flat
+                                movement, which does not work for platformers with gravity and jumps. I modified A* to
+                                support non-grid neighbor nodes and implemented explicit movement logic that respects
+                                gravity. The system runs in the Unity Job System for performance and integrates with the
+                                AIFSM. This fully custom solution allows enemies to navigate complex 2D terrain
+                                predictably and efficiently, solving challenges that standard tutorials do not cover.
+                            </li>
+                            <li>
+                                <strong>Challenges:</strong> One unexpected issue was AI units converging on the same
+                                node. I added an occupied-flag per grid node to prevent collisions. I also experimented
+                                with pathfinding on moving platforms, which worked but introduced complexity and
+                                potential edge cases, so it was later removed.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Camera System -->
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>Safire 2D Camera</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <div class="content-box">
+                        <div style="text-align:center;">
+                            <iframe width="750" height="430" src="https://www.youtube.com/embed/FD8CO3KHtgc?start=85"
+                                title="Safire 2D Camera Demo" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen style="border-radius:16px;">
+                            </iframe>
+                        </div>
+
+                        <br><br>
+                        <p>
+                            I developed a modular 2D camera system. While Unity offers Cinemachine, Safire provides a
+                            tailored solution for 2D games with finer control over camera behavior. The system handles
+                            common challenges such as parallax layers, look-ahead, room-based movement, clamping, shake
+                            effects, and cinematic sequences.
+                        </p>
+                        <br>
+
+                        <ul class="feature-list">
+                            <li>
+                                <strong>The Core Challenge:</strong> The main challenge was coordinating multiple
+                                modules that could modify the camera in the same frame—follow, zoom, boundaries, shake,
+                                and push zones often competed for control. Executing them in the wrong order caused
+                                jitter, boundary violations, or erratic movement. I resolved this by establishing a
+                                prioritized execution sequence determined through careful testing and iteration.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Feature 3: Overworld Map -->
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>Overworld Map & Level Management</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <div class="content-box">
+                        <div class="image-carousel-wrapper">
+                            <!-- Important: root element must have class "image-carousel" because index.js looks for that -->
+                            <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide" data-duration="5000">
+                                        <img src="Images/Overworld1.png" alt="Overworld." />
+                                    </div>
+                                    <div class="swiper-slide" data-duration="14000">
+                                        <img src="Images/Overworld2.gif" alt="Overworld." />
+                                    </div>
+                                    <div class="swiper-slide" data-duration="5000">
+                                        <img src="Images/Overworld3.png" alt="Overworld" />
+                                    </div>
+                                    <!-- add more slides as needed -->
+                                </div>
+
+                                <!-- navigation -->
+                                <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div>
+
+                                <!-- fraction pagination (1 / 3) -->
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+
+                        <ul class="feature-list">
+                            <li>
+                                <strong>The System: </strong> I built a node-based overworld for level navigation and
+                                progress tracking, with a custom editor that lets designers place node (levels,
+                                teleports, blockers) and draw paths directly in the scene, with no coding required. The
+                                system syncs with saved data so completing a level automatically unlocks its node. It
+                                also integrates with the A* algorithm to move the player avatar and includes scene
+                                management tools to load and unload levels seamlessly.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- Additional Systems -->
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>Additional Complex Systems</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <ul class="feature-list">
+                        <li>Interactive foliage using shaders, texture arrays, and the Job System</li>
+                        <li>Wind zones, trampolines, dynamic water waves, and ground-friction controls</li>
+                        <li>Inspector-driven tweening library</li>
+                        <li>Firearms system with line-of-sight, charge mechanics, and recoil</li>
+                        <li>Map System, useful for metroidvanias</li>
+                        <li>Audio manager and scene-management tools</li>
+                        <li>Comprehensive documentation and active community support</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>Closing Remarks</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <p>
+                        Flare was a large-scale engineering project covering physics, AI, animation, and UI, all while
+                        keeping the API designer-friendly. It taught me the value of scalable architecture, modular
+                        design, and long-term maintainability. Supporting real users reinforced how to turn complex
+                        systems into intuitive workflows and build practical tools that solve production challenges. The
+                        experience strengthened my ability to deliver polished, flexible game systems in a professional
+                        setting.
+                    </p>
+                </div>
+            </details>
+        </div>
+    </div>
+</details>
+
+<!-- <details class="card collapsible">
+    <summary class="collapsible-header">
+        <h3>Flare Engine — 2D Platformer Framework</h3>
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+        <p class="intro-text">
+            This was my "rite of passage" engineering project. I designed and built this framework to solve common 2D
+            platformer challenges while maintaining clean, modular architecture. It's published on the Asset Store where
+            it's helped other developers ship their projects. Here are some of the key challenges and problems I solved.
+        </p>
+
+        <!-- Character Controller 
+        <div class="feature-block">
+            <details class="collapsible">
+                <summary class="collapsible-header">
+                    <h4>Character Controller</h4>
+                    <span class="toggle-icon">▼</span>
+                </summary>
+                <div class="collapsible-content">
+                    <div class="image-carousel-wrapper">
+                        <!-- Important: root element must have class "image-carousel" because index.js looks for that 
+                        <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" data-duration="2700">
+                                    <img src="Images/JumpAndSlope.gif" alt="Jump and slope handling." />
+                                </div>
+                                <div class="swiper-slide" data-duration="3800">
+                                    <img src="Images/MovingPlatform.gif" alt="Moving Platform." />
+                                </div>
+                                <div class="swiper-slide" data-duration="6000">
+                                    <img src="Images/Bridge.gif" alt="Bridge" />
+                                </div>
+                                <div class="swiper-slide" data-duration="3800">
+                                    <img src="Images/Zipline.gif" alt="Zipline." />
+                                </div>
+                                <div class="swiper-slide" data-duration="3800">
+                                    <img src="Images/Yoshi.gif" alt="Yoshi." />
+                                </div>
+                                <div class="swiper-slide" data-duration="3400">
+                                    <img src="Images/Cannon.gif" alt="Cannon." />
+                                </div>
+                                <div class="swiper-slide" data-duration="4000">
+                                    <img src="Images/GrapplingGun.gif" alt="Grappling Gun." />
+                                </div>
+                                <div class="swiper-slide" data-duration="17000">
+                                    <img src="Images/PlayerInspector.gif" alt="Player Inspector." />
+                                </div>
+                                <!-- add more slides as needed 
+                            </div>
+
+                            <!-- navigation 
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+
+                            <!-- fraction pagination (1 / 3) 
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                    <div class="content-box">
+                        <br>
+                        <ul class="feature-list">
+                            <li>
+                                <strong>Custom Collision Detection:</strong> Unity's physics solution breaks down during
+                                complex, rapid interactions (like wall-jumping mid-dash onto moving platforms), causing
+                                jitter.
+                                I built a raycast-based collision system that guarantees deterministic, stable movement
+                                across slopes, moving platforms, and one-way surfaces, eliminating the default system's
+                                unpredictability that also supports additional fun mechanics such as vehicles, cannons,
+                                or
+                                grappling systems.
+                                <br><br>
+                                On top of that, I implemented advanced dynamic systems like a bouncy bridge, rope, and
+                                zipline
+                                using manual Verlet physics.
+                                They respond naturally to player interaction, deforming and swinging in real-time while
+                                remaining fully
+                                stable, showcasing custom physics programming.
+                            </li>
+                            <li>
+                                <strong>Priority-Based State Manager:</strong> Managing 20+ abilities with traditional
+                                state
+                                machines creates tangled branching logic and complex bugs. I implemented a
+                                priority-queue
+                                system
+                                that
+                                ranks abilities each frame during runtime and resolves conflicts cleanly (Dash overrides
+                                Walk,
+                                etc.).
+                            </li>
+                            <li>
+                                <strong>Designer Tooling:</strong> Designers needed to tune movement without touching
+                                code.
+                                I created custom Unity Editor inspectors exposing all parameters—forces, cooldowns,
+                                priorities—for rapid, code-free designing.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- AIFSM
+        <div class="feature-block">
+            <h4 class="collapsible">
+                AI Finite State Machine (AIFSM)
+                <span class="toggle-icon">▼</span>
+            </h4>
+            <div class="collapsible-content">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-duration="10000">
+                        <img src="Images/AIFSM.gif" alt="AIFSM." />
+                    </div>
+                </div>
+
+                <div class="subtitle">
+                    If the player is not hiding, the bot will attack. If the player is hiding, the bot will go into
+                    the idle state.
+                </div>
+
+                <div class="content-box">
+                    <br>
+                    <ul class="feature-list">
+                        <li>
+                            <strong>Inspector-Based FSM:</strong> Unity's Animator forces designers to work in
+                            separate
+                            windows and configure transitions through complex parameters, killing workflow for
+                            non-animation logic. I built a complete state machine that lives entirely in the Unity
+                            Inspector. Designers create color-coded states, add behavior nodes, and configure
+                            transitions through dropdowns with zero scripting.
+                        </li>
+                        <li>
+                            <strong>Node Library:</strong> The library consists of 100+ reusable nodes for movement,
+                            sensing, and actions, each with visual success/failure branching. Designers can see live
+                            execution flow at runtime, making enemy behavior, doors, triggers, and stateful objects
+                            easy
+                            to build and debug.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- A Star
+        <div class="feature-block">
+            <div class="content-box">
+                <h4>Gravity-Based A* Pathfinding</h4>
+                <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-duration="25000">
+                            <img src="Images/AStarPathfinding.gif" alt="Jump and slope handling." />
+                        </div>
+                        <div class="swiper-slide" data-duration="6000">
+                            <img src="Images/AStarGrid.png" alt="Moving Platform." />
+                        </div>
+                        <!-- add more slides as needed 
+                    </div>
+
+                    <!-- navigation 
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                    <!-- fraction pagination (1 / 3) 
+                    <div class="swiper-pagination"></div>
+                </div>
+
+                <div class="subtitle">
+                    Grid nodes are typically generated during editor time. But the newest sytem
+                    works with unity Tilemap during runtime to generate dynamic maps.
+                </div>
+                <br>
+
+                <ul class="feature-list">
+                    <li>
+                        <strong>The Algorithm:</strong> Traditional A* assumes grid-based neighbors and
+                        flat movement, which fails in platformers with gravity and jumps. I modified
+                        A* to handle non-grid neighbor nodes and implemented explicit movement logic that respects
+                        gravity. The system runs in the Unity Job System for performance and integrates with the
+                        AIFSM. This rare, fully-custom solution solves challenges that standard tutorials don’t cover,
+                        allowing enemies to navigate complex 2D terrain predictably and efficiently.
+                    </li>
+                    <li>
+                        <strong>Challenges:</strong> One specific challenge I did not anticipate was AI units converging
+                        on the same node, so I added an occupied-flag per grid node to prevent this. I also experimented
+                        with moving platforms for pathfinding, which worked but added complexity and potential edge
+                        cases, so it was later removed.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Camera System 
+        <div class="feature-block">
+            <div class="content-box">
+                <h4>Safire 2D Camera </h4>
+                <div style="text-align:center;">
+                    <iframe width="750" height="430" src="https://www.youtube.com/embed/FD8CO3KHtgc?start=85"
+                        title="Safire 2D Camera Demo" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen style="border-radius:16px;">
+                    </iframe>
+                </div>
+
+                <br><br>
+                <p>
+                    I developed a modular 2D camera system. While Unity offers Cinemachine, Safire provides a tailored
+                    solution specifically for 2D games, giving finer control over camera behavior. The system handles
+                    common challenges such as parallax layers, look-ahead, room-based movement, clamping, shake effects,
+                    and cinematic sequences.
+                </p>
+                <br>
+
+                <ul class="feature-list">
+                    <li>
+                        <strong>Execution Order Challenge:</strong> The biggest challenge was coordinating multiple
+                        modules that could all modify the camera on the same frame—follow, zoom, boundaries, shake, and
+                        push zones
+                        were constantly competing for control. Executing them in the wrong order could break the camera
+                        flow, causing jitter, boundary violations, or erratic movement. Resolving this required a
+                        prioritized execution sequence found through trial and error.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Feature 3: Overworld Map
+        <div class="feature-block">
+            <div class="content-box">
+                <h4>Overworld Map & Level Management</h4>
+                <div class="image-carousel-wrapper">
+                    <!-- Important: root element must have class "image-carousel" because index.js looks for that 
+                    <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" data-duration="5000">
+                                <img src="Images/Overworld1.png" alt="Overworld." />
+                            </div>
+                            <div class="swiper-slide" data-duration="14000">
+                                <img src="Images/Overworld2.gif" alt="Overworld." />
+                            </div>
+                            <div class="swiper-slide" data-duration="5000">
+                                <img src="Images/Overworld3.png" alt="Overworld" />
+                            </div>
+                            <!-- add more slides as needed
+                        </div>
+
+                        <!-- navigation 
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+
+                        <!-- fraction pagination (1 / 3) 
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <ul class="feature-list">
+                    <li>
+                        <strong>The System: </strong> Built a node-based overworld for level navigation and progress
+                        tracking, with a custom editor tool that lets designers place nodes (levels, teleports,
+                        blockers) and draw paths directly in the scene. No coding required. The system syncs with
+                        saved data so completing a level automatically unlocks its node. This system also required the
+                        A*
+                        algorithm to move the player avatar, and scene management tools to load/unload levels
+                        seamlessly.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Additional Systems 
+        <h4>Additional Complex Systems</h4>
+
+        <ul class="feature-list">
+            <li>Interactive foliage using shaders, texture arrays, and the Job System</li>
+            <li>Wind zones, trampolines, dynamic water waves, and ground-friction controls</li>
+            <li>Inspector-driven tweening library</li>
+            <li>Firearms system with line-of-sight, charge mechanics, and recoil</li>
+            <li>Map System, useful for metroidvanias</li>
+            <li>Audio manager and scene-management tools</li>
+            <li>Comprehensive documentation and active community support</li>
+        </ul>
+
+        <br>
+        <h4>Closing Remarks</h4>
+        <p>
+            Flare was a large-scale engineering project that taught me architectural design, editor tooling, and
+            long-term maintainability. It spanned thousands of lines of code across physics, AI, animation, and UI, all
+            while keeping the API approachable for designers. The biggest lesson was the importance of architecture. If
+            I rebuilt Flare today, I would start with a node-driven structure for cleaner modularity and easier
+            extensibility. Supporting a community of users also taught me how to build practical tools, respond to real
+            production needs, and turn complex systems into workflows that feel intuitive.
+        </p>
+
+    </div>
+</details> -->

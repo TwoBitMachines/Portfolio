@@ -1,0 +1,79 @@
+<details class="card collapsible">
+    <summary class="collapsible-header">
+        <div class="header-flex">
+            <img src="Images/BroForce1.gif" alt="Thumbnail" class="project-thumb" />
+            <h3>Broforce — Micro Project</h3>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+
+        <div class="feature-block">
+            <div class="image-carousel-wrapper">
+
+                <div class="swiper image-carousel fullscreen-enabled" aria-label="Project GIFs">
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide" data-duration="24000">
+                            <img width="750" height="430" src="Images/BroForce1.gif" alt="ChainReaction." />
+                        </div>
+                        <div class="swiper-slide" data-duration="8000">
+                            <img width="750" height="430" src="Images/BroForce2.png" alt="BroForce2" />
+                        </div>
+                        <div class="swiper-slide" data-duration="8000">
+                            <img width="750" height="430" src="Images/BroForce3.png" alt="BroForce3." />
+                        </div>
+                    </div>
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+
+            <div class="subtitle">
+                1) Example of chain reaction 2) AI graph 3) Barrel graph
+            </div>
+
+            <br>
+            <div class="content-box">
+
+                <p>
+                    A Broforce inspired micro-project built to explore reaction-based AI systems.
+                    The goal was to create a system of cascading interactions involving environmental
+                    damage and agent responses. The AI graphs demanded careful architectural structure. I used my node
+                    editor, Flow Grid, to keep all behaviour logic organized and manageable.
+                </p>
+
+                <br>
+
+                <ul class="feature-list">
+                    <li>
+                        <strong>Chain Reactions:</strong>
+                        A single bullet can trigger an entire cascade. It hits a barrel,
+                        which explodes and ignites the fuse timers of nearby barrels.
+                        Fire spreads across tiles based on probability, burning through structures
+                        and causing collapse. Barrels without support fall and detonate on impact.
+                        Enemies caught in the blast may survive but catch fire, causing them to panic
+                        and run back and forth, sometimes falling off ledges. They normally patrol and enter an
+                        alert state when the player is nearby. The whole level behaves as one system,
+                        with destruction and fire cascading naturally through the environment.
+                    </li>
+
+                    <li>
+                        <strong>Cross-Object Communication:</strong>
+                        The core challenge was managing communication between objects. Barrels, tiles, enemies, and the
+                        player could all trigger one another through reaction chains, which quickly became too complex
+                        for traditional script references. To solve this, each object broadcasts and receives event
+                        signals through its node graph, allowing reactions to cascade cleanly across the entire level
+                        without hard-coded links. This architecture kept the system organized and manageable.
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</details>

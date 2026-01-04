@@ -1,0 +1,61 @@
+<details class="card collapsible">
+    <summary class="collapsible-header">
+        <div class="header-flex">
+            <img src="Images/MoonBladeSmall.png" alt="Thumbnail" class="project-thumb" />
+            <h3>Moon Blade — 2D Hack & Slash (Team Project)</h3>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+
+        <!-- Feature 1: Character Controller -->
+        <div class="feature-block">
+            <div style="text-align:center;">
+                <video width="750" height="430" controls style="border-radius: 16px;">
+                    <source src="Images/MoonBlade.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="content-box">
+                <br>
+                <p>
+                    <strong><a href="https://twobitmachines.itch.io/moon-blade" target="_blank"
+                            style="color:rgb(240, 178, 46);">Moon Blade</a></strong>
+                    is a 2D hack-and-slash featuring a complete combat loop, a
+                    multi-stage boss, diverse enemies, dialogue interactions, and a coin-based shop system. I led
+                    development, handling core gameplay programming, level design support, and animation integration.
+                    This project also served as a proof of concept for Flare engine.
+                </p>
+                <br>
+                <ul class="feature-list">
+                    <li> <strong>Combat & AI:</strong> The player can perform a four-stage melee combo by purchasing
+                        upgrades from a vendor. Enemy AI includes basic patrol and chase behaviors, slam attacks, and
+                        flying enemies that follow Bezier curves to swoop and strike. The most complex AI is the boss,
+                        which can grab and damage the player and switch between multiple attack patterns. Its logic was
+                        implemented using a custom tree-based node editor built for Flare, as the behavior was too
+                        intricate to manage with a standard AI FSM.
+                    </li>
+
+                    <li> <strong>Core Systems And Challenges:</strong> I used Flare’s built-in systems for dialogue
+                        triggers, conversation trees, AI, visual effects such as blood shaders, and camera control. The
+                        vendor UI required custom code for placement and navigation.
+                        The save system proved to be the most challenging part of the project. Coordinating state across
+                        health, coins, enemy AI, and world persistence was more complex than expected. Dying without
+                        saving at the vendor meant losing coins and respawning enemies, so the system had to carefully
+                        restore or reset each component based on checkpoint state.
+                    </li>
+
+                    <li> <strong>Project Management:</strong> As project lead, I coordinated a remote team across
+                        multiple time zones, working with an artist, a composer, and a level designer. Communication was
+                        handled primarily through Discord for discussion and asset delivery.
+                        I organized tasks, set realistic scope boundaries, and kept development on track under tight
+                        production constraints. Managing time zone differences and limited development time was the main
+                        challenge, but clear communication and careful task planning allowed the project to be completed
+                        successfully.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</details>

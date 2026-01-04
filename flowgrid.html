@@ -1,0 +1,113 @@
+<details class="card collapsible">
+    <summary class="collapsible-header">
+        <div class="header-flex">
+            <img src="Images/FlowGridSmall.png" alt="Thumbnail" class="project-thumb" />
+            <h3>Flow Grid — Behaviour–FSM Node Editor</h3>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+
+        <!-- Feature Block -->
+        <div class="feature-block">
+            <div class="image-carousel-wrapper">
+
+                <div class="swiper image-carousel fullscreen-enabled" aria-label="Project GIFs">
+                    <div class="swiper-wrapper">
+
+                        <!-- Replace with your images -->
+                        <div class="swiper-slide" data-duration="8000">
+                            <img width="750" height="430" src="Images/FlowGridPlayer.png" alt="FlowGridPlayer." />
+                        </div>
+                        <div class="swiper-slide" data-duration="8000">
+                            <img width="750" height="430" src="Images/FlowGridDebug.gif" alt="FlowGridDebug." />
+                        </div>
+                        <div class="swiper-slide" data-duration="8000">
+                            <img width="750" height="630" src="Images/FlowGridState.png" alt="FlowGridState." />
+                        </div>
+                        <div class="swiper-slide" data-duration="8000">
+                            <img width="750" height="430" src="Images/FlowGridStateS.png" alt="FlowGridState." />
+                        </div>
+                    </div>
+
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+            <div class="subtitle">
+                1) Flow Grid sample, character controller 2) Live runtime debugging 3) State nodes (Patrol, Alert,
+                Chase) with complicated state transitions 4) Same behaviour but simiplified, leveraging FlowGrid key
+                features
+            </div>
+            <br>
+            <div class="content-box">
+
+                <br>
+                <p>
+                    Behaviour Trees and Finite State Machines each structure logic differently, but both show
+                    structural limitations when used alone. Behaviour Trees handle decision flow well, but interrupt
+                    handling is not part of their original design, abort systems are patch-like add-ons that create
+                    clutter and indirect logic. FSMs provide clean and predictable state behavior, but they suffer from
+                    transition explosion and repeated entry and exit conditions as complexity grows.
+                    <br><br>
+                    In practice, game AI genuinely needs both: stable states and conditional flow. Forcing everything
+                    into one paradigm always leads to awkward workarounds. To solve this, I built a
+                    <strong>Hybrid Behaviour–FSM Flow Graph</strong>, a node editor that executes behaviour-tree nodes
+                    alongside FSM states inside a single unified system. But, the defining feature is that
+                    most nodes can connect to <i>other</i> children nodes and execute them based on their returned
+                    status. This connection allows the logic to always flow. This keeps logic compact, and allows
+                    state-driven and behaviour-driven flow to coexist cleanly.
+                </p>
+
+                <br>
+
+                <ul class="feature-list">
+
+                    <li>
+                        <strong>ScriptableObject-Based Graph System:</strong>
+                        The editor is built on ScriptableObjects to support reusable graph templates, clean separation
+                        between data and rendering, and safe multi-instance editing. Because ScriptableObjects persist
+                        as assets rather than scene objects, a single copy of the data exists in memory instead of being
+                        duplicated per instance. Multiple AI agents can reference the same behavior graph asset, and the
+                        system integrates naturally with Unity’s Inspector workflow.
+                    </li>
+
+                    <li>
+                        <strong>The Core Challenge:</strong>
+                        Unity cannot serialize scene object references inside ScriptableObjects. While project-level
+                        template graphs were easy to build, creating scene-level graphs that referenced scene objects
+                        was impossible using Unity’s default serialization.
+                        <br><br>
+                        To solve this, I implemented a custom JSON-based serialization layer that safely stores and
+                        reconstructs scene references at runtime. This required a hybrid ID lookup system to map scene
+                        objects into serializable data and reconstruct them using reflection on scene start. This was
+                        the most complex part of the system and the primary technical challenge.
+                    </li>
+
+                    <li>
+                        <strong>Unity Editor API Challenges:</strong>
+                        Building a custom node editor required working directly with Unity’s Editor API, which is not
+                        designed for this use case. The main challenges were implementing smooth panning and zooming.
+                        Since Unity’s editor GUI does not support viewport transformation matrices, I applied manual
+                        matrix transformations to correctly position and scale all node elements. Additional challenges
+                        included connection dragging with proper visual feedback and detecting clicks on overlapping
+                        nodes.
+                    </li>
+                    <li>
+                        <strong>Debugging for Performance:</strong>
+                        A critical performance issue emerged during runtime debugging. Each node subscribed to Unity
+                        callbacks using the += operator, which allocates new delegate instances. With dozens of nodes
+                        subscribing every frame to display live execution state, this created significant garbage
+                        collection pressure. Using Unity’s Profiler, I traced the allocation spikes to these
+                        subscriptions and resolved the issue by replacing the callback system with a polling-based flag
+                        check per node.
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</details>

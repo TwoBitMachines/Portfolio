@@ -1,0 +1,84 @@
+<details class="card collapsible">
+    <summary class="collapsible-header">
+        <div class="header-flex">
+            <img src="Images/SpriteEngineSmall.png" alt="Thumbnail" class="project-thumb" />
+            <h3>Sprite Engine — 2D Animation Controller</h3>
+        </div>
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+
+        <style>
+            /* Scale only the three demo images */
+            .sprite-demo {
+                width: 50%;
+                height: auto;
+                /* preserve aspect ratio */
+                display: block;
+                margin: 0 auto;
+                /* center the image */
+            }
+        </style>
+
+        <!-- Feature 1: Sprite Engine -->
+        <div class="feature-block">
+            <div class="image-carousel-wrapper">
+                <!-- Important: root element must have class "image-carousel" because index.js looks for that -->
+                <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-duration="7000">
+                            <img src="Images/SpriteEngine1.png" alt="SpriteEngine1."
+                                style="width:40%; height:auto; display:block; margin:0 auto;" />
+                        </div>
+                        <div class="swiper-slide" data-duration="7000">
+                            <img src="Images/SpriteEngine2.gif" alt="SpriteEngine2.."
+                                style="width:40%; height:auto; display:block; margin:0 auto;" />
+                        </div>
+                        <div class="swiper-slide" data-duration="7000">
+                            <img src="Images/SpriteEngine3.png" alt="SpriteEngine3."
+                                style="width:40%; height:auto; display:block; margin:0 auto;" />
+                        </div>
+
+                        <!-- add more slides as needed -->
+                    </div>
+
+                    <!-- navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                    <!-- fraction pagination (1 / 3) -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="content-box">
+                <br>
+                <p>
+                    Unity’s Animator is built around general-purpose 3D and curve-based animation, which adds
+                    unnecessary overhead for sprite-based 2D projects. Managing multiple animation assets, layered state
+                    machines, and frequent context switching increases setup and maintenance cost, making it a poor fit
+                    for a fast, centralized 2D workflow.
+                    <br><br>
+                    Sprite Engine replaces Unity’s Animator with a lightweight system focused specifically on 2D
+                    sprites. All animation data is centralized in the Inspector, where designers can configure sprites,
+                    define states, and assign signals without writing code. Feedback from both designers and programmers
+                    has been consistently positive, particularly around iteration speed and clarity.
+                </p>
+                <br>
+                <ul class="feature-list">
+                    <li><strong>Sprite Engine Core:</strong> Designers drag and drop sprites into the Inspector, set
+                        frame timing, create signals, and configure animation states in a single place. At the center of
+                        the system is a priority-based state tree that drives all animation logic. This removes the need
+                        for complex state machines and makes animation behavior easier to reason about and modify.
+                    </li>
+                    <li> <strong>Other Features:</strong> The system supports sprite transitions, sprite swapping, and
+                        per-frame Unity event triggers. It is designed to be code-free by default, though boolean
+                        signals must be set manually when Flare is not used.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</details>

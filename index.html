@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Allan - Unity Developer</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Hi, I'm <span class="accent">Allan</span></h1>
+            <h1>Unity Developer: Gameplay, Systems & Tools Programmer</h1>
+            <p>
+                I'm a Unity developer specializing in gameplay systems, mechanics, and designer-friendly tools. My work
+                includes published Asset Store frameworks like Flare, Pixelverse, and Sprite Engine, and game prototypes
+                that demonstrate sophisticated AI, dynamic camera control, and multiplayer interactions. I enjoy solving
+                complex problems and collaborating to bring ideas to life.
+            </p>
+        </div>
+
+        <!-- lazy loaded section -->
+        <div id="flare-section" class="lazy-section" data-src="flare.html">
+            <div class="loading">Loading Flare section...</div>
+        </div>
+
+        <div id="moonblade" class="lazy-section" data-src="moonblade.html">
+            <div class="loading">Loading MoonBlade section...</div>
+        </div>
+
+        <div id="flowgrid-section" class="lazy-section" data-src="flowgrid.html">
+            <div class="loading">Loading Flow Grid section...</div>
+        </div>
+
+        <div id="broforce" class="lazy-section" data-src="broforce.html">
+            <div class="loading">Loading Broforce section...</div>
+        </div>
+
+        <div id="spriteengine" class="lazy-section" data-src="spriteengine.html">
+            <div class="loading">Loading Sprite Engine section...</div>
+        </div>
+
+        <div id="pixelverse-section" class="lazy-section" data-src="pixelverse.html">
+            <div class="loading">Loading Pixelverse section...</div>
+        </div>
+
+
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Carousel Logic -->
+    <script src="carousel.js"></script>
+
+    <!-- Lazy Loading -->
+    <script>
+        const lazyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.dataset.loaded) {
+                    loadSection(entry.target);
+                }
+            });
+        }, { rootMargin: '200px' });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.lazy-section').forEach(s => lazyObserver.observe(s));
+        });
+
+        document.querySelectorAll(".feature-block .collapsible").forEach(header => {
+
+
+            header.addEventListener("click", () => {
+                const content = header.nextElementSibling;
+                if (!content) return;
+                content.style.display = content.style.display === "none" ? "block" : "none";
+            });
+        });
+
+        function loadSection(element) {
+            const file = element.dataset.src;
+
+            fetch(file)
+                .then(res => res.ok ? res.text() : Promise.reject(res.status))
+                .then(html => {
+                    element.innerHTML = html;
+                    element.dataset.loaded = 'true';
+
+                    // find carousels inside the newly loaded section
+                    const containers = element.querySelectorAll('.image-carousel');
+                    containers.forEach(container => initCarousel(container));
+                })
+                .catch(err => {
+                    element.innerHTML = `<div class="card"><p style="color:red">Error loading section.</p></div>`;
+                });
+        }
+    </script>
+
+</body>
+
+</html>

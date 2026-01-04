@@ -1,0 +1,98 @@
+<details class="card collapsible">
+    <summary class="collapsible-header">
+        <div class="header-flex">
+            <img src="Images/pixelverseSmall.png" alt="Thumbnail" class="project-thumb" />
+            <h3>Pixelverse — Pixel Art Editor</h3>
+        </div>
+
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+
+        <!-- Feature 1: Character Controller -->
+        <div class="feature-block">
+            <div class="image-carousel-wrapper">
+                <!-- Important: root element must have class "image-carousel" because index.js looks for that -->
+                <div class="swiper image-carousel" aria-label="Project GIFs">
+
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide" data-duration="8000">
+                            <img src="Images/Pixelverse1.png" alt="Pixelverse1." />
+                        </div>
+                        <div class="swiper-slide" data-duration="4000">
+                            <img src="Images/PixelverseRun.gif" alt="PixelverseRun." />
+                        </div>
+                        <div class="swiper-slide" data-duration="15000">
+                            <img src="Images/PixelverseShapes.gif" alt="PixelverseShapes." />
+                        </div>
+                        <div class="swiper-slide" data-duration="11000">
+                            <img src="Images/PixelverseQuickEdit.gif" alt="PixelverseQuickEdit." />
+                        </div>
+                        <div class="swiper-slide" data-duration="12000">
+                            <img src="Images/PixelverseIKLeg.gif" alt="PixelverseIKLeg." />
+                        </div>
+                        <!-- add more slides as needed -->
+                    </div>
+
+                    <!-- navigation -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+
+                    <!-- fraction pagination (1 / 3) -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="content-box">
+                <br>
+                <p>
+                    This is a full-featured pixel art editor built for creating sprites and animations directly inside
+                    Unity. Pixel art workflows normally require constant context switching between Unity and external
+                    tools like Aseprite or Photoshop. Even small changes involve export and reimport steps, which slows
+                    iteration and breaks creative flow.
+                    <br><br>
+                    Pixelverse removes this friction by embedding a complete pixel art editor directly into the Unity
+                    Editor. Artists work with familiar tools such as layers, palettes, animation timelines, and drawing
+                    tools without leaving Unity. Each asset can be linked to a dedicated export folder, allowing
+                    one-click exports to PNG, GIF, or texture arrays and significantly improving iteration speed.
+                </p>
+                <br>
+                <ul class="feature-list">
+                    <li>
+                        <strong>The Core Challenge:</strong> Unity’s built-in serialization handles large arrays poorly,
+                        especially raw color data, resulting in excessive memory usage. Even simple sprites can grow to
+                        several megabytes. I addressed this by implementing a custom Run-Length Encoding (RLE) system
+                        that compresses repeated pixels into a compact byte array that Unity serializes efficiently.
+                        Combined with a Job System pass to process the data, this reduced memory usage from megabytes to
+                        kilobytes while maintaining smooth performance.
+                    </li>
+                    <li>
+                        <strong>Job System for Editor Performance:</strong> Operations on large pixel arrays, such as
+                        bucket fill, flip, and rotate, can easily freeze the editor. These operations were offloaded to
+                        Unity’s Job System, keeping the editor responsive even with large canvases.
+                    </li>
+
+                    <li>
+                        <strong>Advanced Technical Features:</strong> I implemented a custom undo/redo system to
+                        efficiently track pixel-level changes, as Unity’s built-in undo system cannot handle real-time
+                        texture editing. The editor also supports quick selection and movement of pixels while painting.
+                        Additionally, I built an IK system for pixel art to enable smooth procedural movement, which is
+                        rarely supported in pixel-based workflows.
+                    </li>
+
+                    <li><strong>Custom Editor UI:</strong> The entire interface was built using Unity’s Editor API,
+                        including a custom color wheel (RGB, HSV, and HSL), layer and palette management, tool
+                        selection, an animation timeline with live preview, automatic frame cropping, canvas resizing,
+                        and folder-based asset organization.</li>
+
+                    <li><strong>Other:</strong> Marquee selection, Bresenham line, circle, and square drawing,
+                        interpolated brush smoothing for gap-free strokes, and extensive shortcut support for painting,
+                        erasing, and timeline navigation.
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</details>
