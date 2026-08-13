@@ -1,0 +1,78 @@
+<details class="card collapsible">
+    <summary class="collapsible-header">
+        <div class="header-flex">
+            <img src="Images/FableSmall.png" alt="Thumbnail" class="project-thumb" />
+            <h3>Fable — 2D Top Down System</h3>
+        </div>
+
+        <span class="toggle-icon">▼</span>
+    </summary>
+
+    <div class="collapsible-content">
+
+        <!-- Feature 1: Character Controller -->
+        <div class="feature-block">
+            <div class="image-carousel-wrapper">
+                <!-- Important: root element must have class "image-carousel" because index.js looks for that -->
+                <div class="video-embed">
+                    <iframe width="640" height="360" src="https://www.youtube.com/embed/N60wxBTmUKw?start=0" title="Fable demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            <div class="content-box">
+                <br>
+                <p>
+                    Fable is a complete 2D top-down system built for Unity, giving developers a ready-made
+                    foundation for top-down games without having to solve the genre's hardest technical problems
+                    from scratch. Top-down games have a unique complication that platformers and side-scrollers
+                    don't: the Y axis is overloaded. It has to represent both vertical movement across the ground
+                    plane and height above it, like jumping or thrown objects, at the same time. Most solutions
+                    either fake the depth with tricks that fall apart under complex geometry, or avoid true
+                    verticality altogether.
+                    <br><br>
+                    Fable solves this properly. It provides a physics collision system that understands depth as
+                    a real axis, a rendering solution that keeps objects sorted correctly no matter how they
+                    overlap, and an inspector-driven behaviour system that lets designers build AI and player
+                    logic visually, without writing new code for every variation.
+                </p>
+                <br>
+                <ul class="feature-list">
+                    <li>
+                        <strong>The Core Challenge — Depth-Aware Collision:</strong> In a standard top-down setup,
+                        the Y axis does double duty for ground position and height, which breaks Unity's built-in
+                        2D and 3D physics assumptions. I built a custom collision system from the ground up that
+                        separates ground-plane position from height, allowing objects to jump, fall, and collide
+                        based on their actual vertical offset rather than a flattened 2D position. This makes
+                        things like jumping over a low object, landing on a platform, or being hit by a projectile
+                        at a specific height behave correctly, something Unity's default 2D physics has no concept
+                        of.
+                    </li>
+                    <li>
+                        <strong>Custom Depth-Sorting Algorithm:</strong> The second major challenge was rendering
+                        order. Once objects can occupy real height and depth, standard sprite sorting breaks down,
+                        especially with overlapping characters, foliage, and multi-tile structures. I designed a
+                        custom sorting algorithm based on the painter's algorithm, but adapted to handle dynamic,
+                        moving objects with varying heights and footprints in real time, rather than the static
+                        scenes the painter's algorithm was originally built for. This keeps every sprite drawn in
+                        the correct order frame to frame, even as characters move through and around each other.
+                    </li>
+                    <li>
+                        <strong>Visual AI & Behaviour Editor:</strong> Fable includes a custom inspector tool for
+                        building AI and player behaviour without touching code. It's structured as a reorderable
+                        tree, similar in spirit to a behaviour tree, where designers can nest, reorder, and
+                        combine logic nodes directly in the Unity Inspector. This makes it possible to express
+                        complex conditional behaviour, patrols, chase logic, state transitions, and player input
+                        handling, through composition rather than scripting, and to iterate on that logic quickly
+                        without recompiling.
+                    </li>
+                    <li>
+                        <strong>Other:</strong> Ground-plane and height-aware character controller, drop shadows
+                        and height-based scaling for a consistent sense of elevation, and a tile-friendly workflow
+                        designed to integrate with existing 2D top-down projects.
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</details>
